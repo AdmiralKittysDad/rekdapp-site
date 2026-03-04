@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REKD — Intelligence for Night Shift</title>
+    <meta name="description" content="REKD turns your health data into operational intelligence. Built for night shift workers who can't afford to guess.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Barlow+Condensed:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #080808;
+            --surface: #0f0f0f;
+            --surface2: #141414;
+            --border: #1c1c1c;
+            --border2: #242424;
+            --accent: #c8fa5f;
+            --accent-dim: rgba(200,250,95,0.08);
+            --accent-dim2: rgba(200,250,95,0.15);
+            --text: #f0f0f0;
+            --secondary: #5a5a5a;
+            --tertiary: #333;
+            --mono: 'DM Mono', monospace;
+            --display: 'Barlow Condensed', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--mono);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ── GRID OVERLAY ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(200,250,95,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200,250,95,0.025) 1px, transparent 1px);
+            background-size: 64px 64px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            height: 64px;
+            background: rgba(8,8,8,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-wordmark {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--secondary);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.15s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-cta {
+            background: var(--accent) !important;
+            color: var(--bg) !important;
+            padding: 8px 20px;
+            font-family: var(--display) !important;
+            font-weight: 700 !important;
+            font-size: 12px !important;
+            letter-spacing: 0.15em !important;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 40px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        h1 {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: clamp(64px, 10vw, 120px);
+            line-height: 0.9;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            color: var(--text);
+        }
+
+        h1 .accent { color: var(--accent); }
+        h1 .dim { color: var(--tertiary); }
+
+        .hero-sub {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--secondary);
+            max-width: 520px;
+            margin-bottom: 48px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent);
+            color: var(--bg);
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 16px 28px;
+            text-decoration: none;
+            transition: opacity 0.15s;
+        }
+
+        .btn-primary:hover { opacity: 0.88; }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: transparent;
+            color: var(--text);
+            font-family: var(--display);
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 15px 28px;
+            text-decoration: none;
+            border: 1px solid var(--border2);
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* App Store badge */
+        .app-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: border-color 0.15s;
+        }
+
+        .app-badge:hover { border-color: var(--accent); }
+
+        .app-badge-icon { font-size: 20px; }
+
+        .app-badge-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-badge-sub {
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            color: var(--secondary);
+            text-transform: uppercase;
+        }
+
+        .app-badge-name {
+            font-family: var(--display);
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.05em;
+            color: var(--text);
+        }
+
+        /* Hero stats strip */
+        .hero-stats {
+            display: flex;
+            gap: 0;
+            margin-top: 80px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat {
+            flex: 1;
+            padding: 28px 32px;
+            border-right: 1px solid var(--border);
+        }
+
+        .stat:last-child { border-right: none; }
+
+        .stat-value {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 36px;
+            letter-spacing: 0.02em;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: var(--secondary);
+            text-transform: uppercase;
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 40px;
+        }
+
+        .section-eyebrow {
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-eyebrow::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        h2 {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(40px, 6vw, 72px);
+            line-height: 0.95;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        h2 .accent { color: var(--accent); }
+
+        .section-lead {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--secondary);
+            max-width: 480px;
+            margin-bottom: 64px;
+        }
+
+        /* ── SIGNAL DISPLAY ── */
+        .signal-section {
+            border-top: 1px solid var(--border);
+        }
+
+        .signal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            margin-top: 64px;
+        }
+
+        .signal-cell {
+            background: var(--surface);
+            padding: 40px;
+        }
+
+        .signal-cell.accent-cell {
+            background: var(--accent-dim);
+        }
+
+        .signal-cell.span2 {
+            grid-column: span 2;
+        }
+
+        .signal-number {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: 96px;
+            line-height: 1;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .signal-label {
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            color: var(--secondary);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .signal-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .signal-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .signal-bar-name {
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            color: var(--secondary);
+            text-transform: uppercase;
+            width: 120px;
+            flex-shrink: 0;
+        }
+
+        .signal-bar-track {
+            flex: 1;
+            height: 2px;
+            background: var(--border2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signal-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: var(--accent);
+            animation: barGrow 1.5s ease both;
+        }
+
+        @keyframes barGrow {
+            from { width: 0 !important; }
+        }
+
+        .signal-bar-val {
+            font-size: 11px;
+            color: var(--text);
+            width: 32px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .cell-title {
+            font-family: var(--display);
+            font-weight: 600;
+            font-size: 24px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .cell-body {
+            font-size: 12px;
+            line-height: 1.8;
+            color: var(--secondary);
+        }
+
+        /* ── FEATURES ── */
+        .features-section {
+            border-top: 1px solid var(--border);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            margin-top: 64px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            padding: 40px;
+            transition: background 0.2s;
+        }
+
+        .feature-card:hover { background: var(--surface2); }
+
+        .feature-index {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: var(--tertiary);
+            margin-bottom: 24px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .feature-title {
+            font-family: var(--display);
+            font-weight: 600;
+            font-size: 20px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .feature-body {
+            font-size: 12px;
+            line-height: 1.8;
+            color: var(--secondary);
+        }
+
+        /* ── INTEGRATIONS ── */
+        .integrations-section {
+            border-top: 1px solid var(--border);
+        }
+
+        .integrations-strip {
+            display: flex;
+            gap: 0;
+            border: 1px solid var(--border);
+            margin-top: 64px;
+            overflow: hidden;
+        }
+
+        .integration-pill {
+            flex: 1;
+            padding: 24px 20px;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s;
+        }
+
+        .integration-pill:last-child { border-right: none; }
+        .integration-pill:hover { background: var(--accent-dim); }
+
+        .integration-name {
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            color: var(--secondary);
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .integration-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        /* ── FOR WHO ── */
+        .forwho-section {
+            border-top: 1px solid var(--border);
+        }
+
+        .forwho-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 64px;
+        }
+
+        .forwho-item {
+            padding: 40px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .forwho-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--accent);
+        }
+
+        .forwho-role {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 22px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        .forwho-body {
+            font-size: 12px;
+            line-height: 1.8;
+            color: var(--secondary);
+        }
+
+        /* ── CTA SECTION ── */
+        .cta-section {
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 48px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border);
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-wordmark {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: 18px;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: var(--secondary);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.15s;
+        }
+
+        .footer-links a:hover { color: var(--text); }
+
+        .footer-copy {
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            color: var(--tertiary);
+        }
+
+        /* ── SCAN LINE ANIMATION ── */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.15;
+            animation: scan 8s linear infinite;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        @keyframes scan {
+            from { top: 0; }
+            to { top: 100vh; }
+        }
+
+        /* ── SCROLL ANIMATIONS ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            .hero, section { padding-left: 20px; padding-right: 20px; }
+            .hero-stats { flex-wrap: wrap; }
+            .stat { min-width: 50%; }
+            .signal-grid, .features-grid, .forwho-grid { grid-template-columns: 1fr; }
+            .signal-cell.span2 { grid-column: span 1; }
+            .signal-number { font-size: 64px; }
+            .integrations-strip { flex-wrap: wrap; }
+            footer { flex-direction: column; gap: 24px; text-align: center; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="scanline"></div>
+
+<!-- NAV -->
+<nav>
+    <a href="/" class="nav-wordmark">REKD</a>
+    <ul class="nav-links">
+        <li><a href="#signal">The Signal</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#integrations">Integrations</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="#download" class="nav-cta">Download</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-eyebrow">Night Shift Intelligence</div>
+    <h1>
+        Your body<br>
+        doesn't run<br>
+        <span class="accent">9 to 5.</span><br>
+        <span class="dim">Neither does</span><br>
+        <span class="accent">REKD.</span>
+    </h1>
+    <p class="hero-sub">
+        REKD turns your health data into a single operational score — calibrated for the biological reality of night shift. No guesswork. No generic wellness advice. Just signal.
+    </p>
+    <div class="hero-actions">
+        <a href="#download" class="app-badge">
+            <span class="app-badge-icon">🍎</span>
+            <span class="app-badge-text">
+                <span class="app-badge-sub">Download on the</span>
+                <span class="app-badge-name">App Store</span>
+            </span>
+        </a>
+        <a href="#signal" class="btn-secondary">See how it works</a>
+    </div>
+
+    <div class="hero-stats">
+        <div class="stat">
+            <div class="stat-value">23M+</div>
+            <div class="stat-label">Night shift workers in the US</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">3×</div>
+            <div class="stat-label">Higher cardiovascular risk</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Health apps built for them</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">REKD</div>
+            <div class="stat-label">Until now</div>
+        </div>
+    </div>
+</div>
+
+<!-- THE SIGNAL -->
+<section class="signal-section" id="signal">
+    <div class="reveal">
+        <div class="section-eyebrow">The Signal</div>
+        <h2>One number.<br><span class="accent">Everything</span><br>that matters.</h2>
+        <p class="section-lead">
+            REKD synthesizes sleep quality, HRV, shift fatigue, nutrition adherence, and recovery trajectory into a single score — computed fresh every day, calibrated to your biology.
+        </p>
+    </div>
+
+    <div class="signal-grid reveal">
+        <div class="signal-cell accent-cell">
+            <div class="signal-number">84</div>
+            <div class="signal-label">Today's Signal</div>
+            <div class="signal-bars">
+                <div class="signal-bar-row">
+                    <span class="signal-bar-name">Sleep Quality</span>
+                    <div class="signal-bar-track"><div class="signal-bar-fill" style="width:78%"></div></div>
+                    <span class="signal-bar-val">78</span>
+                </div>
+                <div class="signal-bar-row">
+                    <span class="signal-bar-name">HRV</span>
+                    <div class="signal-bar-track"><div class="signal-bar-fill" style="width:91%"></div></div>
+                    <span class="signal-bar-val">91</span>
+                </div>
+                <div class="signal-bar-row">
+                    <span class="signal-bar-name">Shift Fatigue</span>
+                    <div class="signal-bar-track"><div class="signal-bar-fill" style="width:62%"></div></div>
+                    <span class="signal-bar-val">62</span>
+                </div>
+                <div class="signal-bar-row">
+                    <span class="signal-bar-name">Nutrition</span>
+                    <div class="signal-bar-track"><div class="signal-bar-fill" style="width:88%"></div></div>
+                    <span class="signal-bar-val">88</span>
+                </div>
+                <div class="signal-bar-row">
+                    <span class="signal-bar-name">Recovery</span>
+                    <div class="signal-bar-track"><div class="signal-bar-fill" style="width:81%"></div></div>
+                    <span class="signal-bar-val">81</span>
+                </div>
+            </div>
+        </div>
+        <div class="signal-cell" style="display:flex;flex-direction:column;gap:32px;">
+            <div>
+                <div class="cell-title">Not a fitness score</div>
+                <div class="cell-body">REKD doesn't reward you for running. It measures whether your nervous system is recovered, your circadian rhythm is stable, and your body can sustain the demands you're actually placing on it.</div>
+            </div>
+            <div>
+                <div class="cell-title">Not generic wellness</div>
+                <div class="cell-body">Every insight is calibrated to your shift schedule, your dosing cycle, your sleep windows. The algorithm knows you work when the world sleeps.</div>
+            </div>
+        </div>
+        <div class="signal-cell span2">
+            <div style="display:flex;align-items:center;gap:48px;flex-wrap:wrap;">
+                <div>
+                    <div class="cell-title">Powered by Claude AI</div>
+                    <div class="cell-body" style="max-width:480px;">Your Signal isn't a formula. It's a conversation between your data and an intelligence that understands context, nuance, and the specific biology of rotating shift work. Every score comes with an explanation. Every insight is actionable.</div>
+                </div>
+                <div style="flex:1;min-width:200px;border-left:2px solid var(--accent);padding-left:32px;">
+                    <div style="font-size:13px;line-height:1.9;color:var(--secondary);font-style:italic;">"HRV is elevated relative to your 14-day baseline. Combined with 7h12m sleep and low shift fatigue, today is a high-output window. Prioritize your most demanding work in the first 3 hours post-wake."</div>
+                    <div style="font-size:10px;letter-spacing:0.15em;color:var(--tertiary);margin-top:12px;text-transform:uppercase;">Sample Signal Insight</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+    <div class="reveal">
+        <div class="section-eyebrow">Features</div>
+        <h2>Built for the<br><span class="accent">operational</span><br>reality.</h2>
+        <p class="section-lead">Every feature exists because night shift workers need it — not because a wellness app checklist says it should exist.</p>
+    </div>
+
+    <div class="features-grid reveal">
+        <div class="feature-card">
+            <div class="feature-index">01</div>
+            <div class="feature-icon">◈</div>
+            <div class="feature-title">Adaptive Daily Reset</div>
+            <div class="feature-body">REKD learns your actual wake time from sleep data and resets your day accordingly. Your day starts when you wake up — not at midnight.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-index">02</div>
+            <div class="feature-icon">◎</div>
+            <div class="feature-title">Medication Intelligence</div>
+            <div class="feature-body">GLP-1 cycle tracking with injection logging, dose history, appetite correlation, and Signal adjustments across your weekly cycle. Your pharmacology is part of your physiology.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-index">03</div>
+            <div class="feature-icon">▲</div>
+            <div class="feature-title">Shift-Aware Workouts</div>
+            <div class="feature-body">AI-generated workouts calibrated to your current Signal, shift schedule, and recovery status. No more guessing whether today is a training day.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-index">04</div>
+            <div class="feature-icon">◇</div>
+            <div class="feature-title">Passive Observation Engine</div>
+            <div class="feature-body">REKD learns from your environment — commute patterns, barometric pressure, work location context — and builds insights without requiring you to log anything.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-index">05</div>
+            <div class="feature-icon">⊕</div>
+            <div class="feature-title">Weekly Briefing</div>
+            <div class="feature-body">Every 7 days, a comprehensive intelligence report covering body composition trends, performance patterns, primary risks, and your focus for the week ahead.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-index">06</div>
+            <div class="feature-icon">◉</div>
+            <div class="feature-title">Apple Watch + Widgets</div>
+            <div class="feature-body">Your Signal on your wrist. Complication, standalone Watch face, and home screen widgets keep your score visible without opening the app.</div>
+        </div>
+    </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section class="integrations-section" id="integrations">
+    <div class="reveal">
+        <div class="section-eyebrow">Integrations</div>
+        <h2>Your data,<br><span class="accent">wherever</span><br>it lives.</h2>
+        <p class="section-lead">REKD connects to the devices and services you already use. Your data stays yours — always processed on device or end-to-end encrypted.</p>
+    </div>
+
+    <div class="integrations-strip reveal">
+        <div class="integration-pill">
+            <div class="integration-dot"></div>
+            <div class="integration-name">Apple Health</div>
+        </div>
+        <div class="integration-pill">
+            <div class="integration-dot"></div>
+            <div class="integration-name">Apple Watch</div>
+        </div>
+        <div class="integration-pill">
+            <div class="integration-dot"></div>
+            <div class="integration-name">Withings</div>
+        </div>
+        <div class="integration-pill">
+            <div class="integration-dot"></div>
+            <div class="integration-name">Oura Ring</div>
+        </div>
+        <div class="integration-pill">
+            <div class="integration-dot"></div>
+            <div class="integration-name">WHOOP</div>
+        </div>
+        <div class="integration-pill">
+            <div class="integration-dot"></div>
+            <div class="integration-name">Garmin</div>
+        </div>
+        <div class="integration-pill">
+            <div class="integration-dot"></div>
+            <div class="integration-name">More coming</div>
+        </div>
+    </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="forwho-section">
+    <div class="reveal">
+        <div class="section-eyebrow">Who It's For</div>
+        <h2>If you work<br>when the world<br><span class="accent">sleeps.</span></h2>
+    </div>
+
+    <div class="forwho-grid reveal">
+        <div class="forwho-item">
+            <div class="forwho-role">Healthcare Workers</div>
+            <div class="forwho-body">Nurses, paramedics, ER physicians, surgical techs. The people making life-or-death decisions at 4am on their third consecutive night shift.</div>
+        </div>
+        <div class="forwho-item">
+            <div class="forwho-role">Logistics & Operations</div>
+            <div class="forwho-body">Warehouse managers, dock supervisors, dispatchers, air traffic control. High-consequence decisions under sustained circadian disruption.</div>
+        </div>
+        <div class="forwho-item">
+            <div class="forwho-role">Security & Law Enforcement</div>
+            <div class="forwho-body">Officers, security professionals, correctional staff. Sustained alertness requirements with unpredictable sleep windows.</div>
+        </div>
+        <div class="forwho-item">
+            <div class="forwho-role">Industrial & Manufacturing</div>
+            <div class="forwho-body">Plant operators, maintenance technicians, quality inspectors. Physical and cognitive demands that don't pause for biology.</div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="download">
+    <div class="cta-inner reveal">
+        <div class="section-eyebrow" style="justify-content:center;">Get Started</div>
+        <h2>Know your<br><span class="accent">Signal.</span></h2>
+        <p class="section-lead" style="margin-left:auto;margin-right:auto;text-align:center;">
+            Available on iPhone. Requires iOS 17 or later and an Apple Watch for full functionality.
+        </p>
+        <div class="cta-actions">
+            <a href="#" class="app-badge" style="min-width:200px;justify-content:center;">
+                <span class="app-badge-icon">🍎</span>
+                <span class="app-badge-text">
+                    <span class="app-badge-sub">Download on the</span>
+                    <span class="app-badge-name">App Store</span>
+                </span>
+            </a>
+        </div>
+        <p style="font-size:11px;color:var(--tertiary);margin-top:24px;letter-spacing:0.1em;">Free to download · Pro subscription required for Signal intelligence</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-wordmark">REKD</div>
+    <ul class="footer-links">
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/auth/reset">Reset Password</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Admiral Kitty Studios LLC</div>
+</footer>
+
+<script>
+    // Intersection observer for scroll reveals
+    const reveals = document.querySelectorAll('.reveal')
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible')
+                }, i * 80)
+                observer.unobserve(entry.target)
+            }
+        })
+    }, { threshold: 0.1 })
+
+    reveals.forEach(el => observer.observe(el))
+
+    // Animate signal bars on scroll into view
+    const barObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.signal-bar-fill').forEach(bar => {
+                    bar.style.animationPlayState = 'running'
+                })
+                barObserver.unobserve(entry.target)
+            }
+        })
+    }, { threshold: 0.3 })
+
+    document.querySelectorAll('.signal-grid').forEach(el => barObserver.observe(el))
+</script>
+
+</body>
+</html>
