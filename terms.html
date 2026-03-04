@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service — REKD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #080808; --surface: #0f0f0f; --border: #1c1c1c;
+            --accent: #c8fa5f; --text: #f0f0f0; --secondary: #888;
+            --mono: 'DM Mono', monospace; --display: 'Barlow Condensed', sans-serif;
+        }
+        body { background: var(--bg); color: var(--text); font-family: var(--mono); -webkit-font-smoothing: antialiased; }
+        body::before {
+            content: ''; position: fixed; inset: 0; pointer-events: none;
+            background-image: linear-gradient(rgba(200,250,95,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(200,250,95,0.025) 1px, transparent 1px);
+            background-size: 64px 64px;
+        }
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 40px; height: 64px;
+            background: rgba(8,8,8,0.92); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-wordmark { font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: 0.15em; color: var(--accent); text-decoration: none; }
+        .nav-back { font-size: 11px; letter-spacing: 0.2em; color: var(--secondary); text-decoration: none; text-transform: uppercase; transition: color 0.15s; }
+        .nav-back:hover { color: var(--text); }
+        main { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 120px 40px 80px; }
+        .eyebrow { font-size: 10px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+        h1 { font-family: var(--display); font-weight: 800; font-size: 56px; line-height: 0.95; text-transform: uppercase; margin-bottom: 16px; }
+        .updated { font-size: 11px; letter-spacing: 0.15em; color: var(--secondary); margin-bottom: 56px; text-transform: uppercase; }
+        h2 { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 48px 0 16px; }
+        p { font-size: 13px; line-height: 1.9; color: var(--secondary); margin-bottom: 16px; }
+        ul { padding-left: 20px; margin-bottom: 16px; }
+        li { font-size: 13px; line-height: 1.9; color: var(--secondary); margin-bottom: 4px; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .divider { height: 1px; background: var(--border); margin: 48px 0; }
+        .highlight {
+            border-left: 2px solid var(--accent); padding: 20px 24px;
+            background: rgba(200,250,95,0.04); margin-bottom: 24px;
+        }
+        .highlight p { margin: 0; }
+        footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 32px 40px; max-width: 720px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .footer-wordmark { font-family: var(--display); font-weight: 800; font-size: 16px; letter-spacing: 0.15em; color: var(--accent); }
+        .footer-copy { font-size: 10px; letter-spacing: 0.1em; color: var(--secondary); }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="nav-wordmark">REKD</a>
+    <a href="/" class="nav-back">← Back</a>
+</nav>
+<main>
+    <div class="eyebrow">Legal</div>
+    <h1>Terms of<br>Service</h1>
+    <div class="updated">Last updated: March 2026</div>
+
+    <div class="highlight">
+        <p>REKD is a health intelligence tool, not a medical device. Nothing in this app constitutes medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider before making decisions about your health.</p>
+    </div>
+
+    <p>These Terms of Service ("Terms") govern your use of the REKD mobile application and website operated by Admiral Kitty Studios LLC ("we," "us," or "our"). By downloading or using REKD, you agree to these Terms.</p>
+
+    <h2>Eligibility</h2>
+    <p>You must be at least 18 years old to use REKD. By using the app, you represent that you meet this requirement.</p>
+
+    <h2>Your Account</h2>
+    <p>You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account. Notify us immediately at <a href="mailto:support@rekdapp.com">support@rekdapp.com</a> if you suspect unauthorized access.</p>
+    <p>You may not create accounts on behalf of others, use automated means to create accounts, or use REKD for any purpose that violates applicable law.</p>
+
+    <h2>Subscriptions and Billing</h2>
+    <p>REKD Pro is available as a monthly or annual subscription, billed through Apple's App Store. By subscribing you authorize Apple to charge your payment method on a recurring basis until you cancel.</p>
+    <ul>
+        <li>Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period</li>
+        <li>Cancellations take effect at the end of the current billing period — no partial refunds</li>
+        <li>Manage or cancel your subscription at any time in iOS Settings → [Your Name] → Subscriptions</li>
+        <li>All billing disputes are handled through Apple in accordance with their policies</li>
+    </ul>
+
+    <h2>Acceptable Use</h2>
+    <p>You agree not to:</p>
+    <ul>
+        <li>Reverse engineer, decompile, or attempt to extract the source code of REKD</li>
+        <li>Use REKD in any way that could damage, disable, or impair our servers or infrastructure</li>
+        <li>Attempt to gain unauthorized access to any part of the service</li>
+        <li>Use REKD to store or transmit malicious code</li>
+        <li>Resell, sublicense, or commercially exploit REKD or its output without our written consent</li>
+    </ul>
+
+    <h2>Health Data and Medical Disclaimer</h2>
+    <p>REKD processes health and biometric data to generate insights and recommendations. This information is provided for general wellness purposes only.</p>
+    <ul>
+        <li>REKD is not a medical device and is not FDA-cleared or approved</li>
+        <li>Signal scores and insights are not medical diagnoses</li>
+        <li>Do not use REKD to make clinical decisions or replace professional medical judgment</li>
+        <li>In a medical emergency, contact emergency services immediately</li>
+    </ul>
+    <p>By using REKD you acknowledge and accept these limitations.</p>
+
+    <h2>Intellectual Property</h2>
+    <p>REKD and all associated content, features, and functionality are owned by Admiral Kitty Studios LLC and are protected by copyright, trademark, and other intellectual property laws. You may not copy, modify, distribute, or create derivative works without our express written permission.</p>
+    <p>Your health data remains yours. We claim no ownership over personal data you provide or that is collected from your devices.</p>
+
+    <h2>Third-Party Services</h2>
+    <p>REKD integrates with third-party services including Apple HealthKit, Withings, Oura, and Garmin. Your use of those services is governed by their respective terms and privacy policies. We are not responsible for the practices of third-party services.</p>
+
+    <h2>Disclaimer of Warranties</h2>
+    <p>REKD is provided "as is" and "as available" without warranties of any kind, either express or implied. We do not warrant that the service will be uninterrupted, error-free, or completely secure. We make no warranty regarding the accuracy of health insights or Signal scores.</p>
+
+    <h2>Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, Admiral Kitty Studios LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of REKD, including but not limited to health decisions made based on app insights, data loss, or service interruptions.</p>
+    <p>Our total liability to you for any claim arising from these Terms or your use of REKD shall not exceed the amount you paid us in the twelve months preceding the claim.</p>
+
+    <h2>Termination</h2>
+    <p>We may suspend or terminate your account at our discretion if you violate these Terms. You may delete your account at any time from Settings → Account → Delete Account. Upon termination, your right to use REKD ceases immediately.</p>
+
+    <h2>Governing Law</h2>
+    <p>These Terms are governed by the laws of the State of Illinois, without regard to conflict of law principles. Any disputes shall be resolved in the courts of Cook County, Illinois.</p>
+
+    <h2>Changes to These Terms</h2>
+    <p>We may update these Terms from time to time. Material changes will be communicated via in-app notification. Continued use of REKD after changes constitutes acceptance of the updated Terms.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about these Terms: <a href="mailto:legal@rekdapp.com">legal@rekdapp.com</a></p>
+
+    <div class="divider"></div>
+    <p style="font-size:11px;color:var(--secondary);">Admiral Kitty Studios LLC · rekdapp.com</p>
+</main>
+<footer>
+    <div class="footer-wordmark">REKD</div>
+    <div class="footer-copy">© 2026 Admiral Kitty Studios LLC</div>
+</footer>
+</body>
+</html>
