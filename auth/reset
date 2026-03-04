@@ -463,8 +463,8 @@
             try {
                 // Use Supabase REST API directly — no SDK needed
                 // Step 1: Exchange recovery token to get a session
-                const SUPABASE_URL = 'https://YOUR_PROJECT_REF.supabase.co'
-                const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY'
+                const SUPABASE_URL = 'https://waamrvvqssxwbiutpouf.supabase.co'
+                const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhYW1ydnZxc3N4d2JpdXRwb3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0MzY2ODEsImV4cCI6MjA4ODAxMjY4MX0.08QkmO7bB3iqqPPbUVt769u63D2s9zW9ZpF4ZGPIu4Q'
 
                 // Update the user's password using the access token from the URL
                 const response = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
