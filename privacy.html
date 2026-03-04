@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — REKD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #080808; --surface: #0f0f0f; --border: #1c1c1c;
+            --accent: #c8fa5f; --text: #f0f0f0; --secondary: #5a5a5a;
+            --mono: 'DM Mono', monospace; --display: 'Barlow Condensed', sans-serif;
+        }
+        body { background: var(--bg); color: var(--text); font-family: var(--mono); -webkit-font-smoothing: antialiased; }
+        body::before {
+            content: ''; position: fixed; inset: 0; pointer-events: none;
+            background-image: linear-gradient(rgba(200,250,95,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(200,250,95,0.025) 1px, transparent 1px);
+            background-size: 64px 64px;
+        }
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 40px; height: 64px;
+            background: rgba(8,8,8,0.92); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-wordmark { font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: 0.15em; color: var(--accent); text-decoration: none; }
+        .nav-back { font-size: 11px; letter-spacing: 0.2em; color: var(--secondary); text-decoration: none; text-transform: uppercase; transition: color 0.15s; }
+        .nav-back:hover { color: var(--text); }
+        main { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 120px 40px 80px; }
+        .eyebrow { font-size: 10px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+        h1 { font-family: var(--display); font-weight: 800; font-size: 56px; line-height: 0.95; text-transform: uppercase; margin-bottom: 16px; }
+        .updated { font-size: 11px; letter-spacing: 0.15em; color: var(--secondary); margin-bottom: 56px; text-transform: uppercase; }
+        h2 { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 48px 0 16px; }
+        p { font-size: 13px; line-height: 1.9; color: var(--secondary); margin-bottom: 16px; }
+        ul { padding-left: 20px; margin-bottom: 16px; }
+        li { font-size: 13px; line-height: 1.9; color: var(--secondary); margin-bottom: 4px; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .divider { height: 1px; background: var(--border); margin: 48px 0; }
+        footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 32px 40px; max-width: 720px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .footer-wordmark { font-family: var(--display); font-weight: 800; font-size: 16px; letter-spacing: 0.15em; color: var(--accent); }
+        .footer-copy { font-size: 10px; letter-spacing: 0.1em; color: var(--secondary); }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="nav-wordmark">REKD</a>
+    <a href="/" class="nav-back">← Back</a>
+</nav>
+<main>
+    <div class="eyebrow">Legal</div>
+    <h1>Privacy<br>Policy</h1>
+    <div class="updated">Last updated: March 2026</div>
+
+    <p>Admiral Kitty Studios LLC ("we," "us," or "our") operates the REKD mobile application. This policy explains what data we collect, how we use it, and your rights regarding that data.</p>
+    <p>REKD is built for night shift workers. We understand that health data is among the most sensitive personal information that exists. We treat it accordingly.</p>
+
+    <h2>Data We Collect</h2>
+    <p>REKD collects the following categories of data:</p>
+    <ul>
+        <li><strong>Health and fitness data</strong> — sourced from Apple HealthKit, Apple Watch, and connected third-party devices (Withings, Oura, WHOOP, Garmin). This includes heart rate, HRV, sleep analysis, body composition, activity, and related metrics.</li>
+        <li><strong>Account information</strong> — email address and authentication credentials used to create and access your account.</li>
+        <li><strong>Behavioral metadata</strong> — anonymized timing and pattern data derived from your health data, used to compute your Signal score and generate insights. Raw health values are never transmitted to our servers.</li>
+        <li><strong>Usage data</strong> — aggregate token usage for AI inference, used for rate limiting and service integrity. No prompt content is logged.</li>
+    </ul>
+
+    <h2>How We Use Your Data</h2>
+    <ul>
+        <li>To compute your daily Signal score and generate personalized health insights</li>
+        <li>To provide AI-powered recommendations calibrated to your shift schedule and health status</li>
+        <li>To sync your data across your devices</li>
+        <li>To improve REKD's algorithms and insight quality (using anonymized, aggregated data only)</li>
+    </ul>
+
+    <h2>HealthKit Data</h2>
+    <p>REKD accesses Apple HealthKit data solely to provide the features described in this application. We do not sell HealthKit data to third parties. We do not use HealthKit data for advertising. HealthKit data is processed on your device wherever possible. Behavioral metadata derived from HealthKit data (never raw values) may be stored on our servers to power your Signal history and weekly briefings.</p>
+
+    <h2>Data Storage and Security</h2>
+    <p>Your account data and behavioral metadata are stored in a secured database hosted by Supabase, with row-level security ensuring only you can access your data. Authentication tokens are stored in your device's secure Keychain. OAuth credentials for third-party integrations never leave your device.</p>
+    <p>AI inference is performed via Anthropic's Claude API. Your health prompts are not logged or used for model training by Anthropic under our data processing agreement.</p>
+
+    <h2>Third-Party Integrations</h2>
+    <p>When you connect a third-party service (Withings, Oura, WHOOP, Garmin), you authorize REKD to read data from that service on your behalf. We store only the OAuth tokens required to maintain that connection, secured in your device's Keychain. You can disconnect any integration at any time from Settings → Integrations.</p>
+
+    <h2>Data Sharing</h2>
+    <p>We do not sell your personal data. We do not share your health data with advertisers. We share data with the following third parties only as required to operate the service:</p>
+    <ul>
+        <li><strong>Supabase</strong> — database and authentication infrastructure</li>
+        <li><strong>Anthropic</strong> — AI inference for Signal computation and insights</li>
+        <li><strong>Apple</strong> — App Store subscription validation</li>
+    </ul>
+
+    <h2>Your Rights</h2>
+    <ul>
+        <li><strong>Access</strong> — you can request a copy of all data we hold about you</li>
+        <li><strong>Deletion</strong> — you can delete your account and all associated data at any time from Settings → Account → Delete Account</li>
+        <li><strong>Portability</strong> — you can export your Signal history and health metadata in JSON format</li>
+        <li><strong>Correction</strong> — you can update your profile information at any time</li>
+    </ul>
+
+    <h2>Children's Privacy</h2>
+    <p>REKD is not intended for users under 18 years of age. We do not knowingly collect data from minors.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We will notify you of material changes to this policy via in-app notification and by updating the date above. Continued use of REKD after changes constitutes acceptance of the updated policy.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy or requests regarding your data: <a href="mailto:privacy@rekdapp.com">privacy@rekdapp.com</a></p>
+
+    <div class="divider"></div>
+    <p style="font-size:11px;color:var(--secondary);">Admiral Kitty Studios LLC · rekdapp.com</p>
+</main>
+<footer>
+    <div class="footer-wordmark">REKD</div>
+    <div class="footer-copy">© 2026 Admiral Kitty Studios LLC</div>
+</footer>
+</body>
+</html>
