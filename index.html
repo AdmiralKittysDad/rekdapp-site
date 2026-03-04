@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REKD — Intelligence for Night Shift</title>
-    <meta name="description" content="REKD turns your health data into operational intelligence. Built for night shift workers who can't afford to guess.">
+    <meta name="description" content="REKD turns your health signals into operational intelligence. Know your body. Own your day.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Barlow+Condensed:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,8 +21,8 @@
             --accent-dim: rgba(200,250,95,0.08);
             --accent-dim2: rgba(200,250,95,0.15);
             --text: #f0f0f0;
-            --secondary: #5a5a5a;
-            --tertiary: #333;
+            --secondary: #888;
+            --tertiary: #444;
             --mono: 'DM Mono', monospace;
             --display: 'Barlow Condensed', sans-serif;
         }
@@ -642,24 +642,7 @@
             color: var(--tertiary);
         }
 
-        /* ── SCAN LINE ANIMATION ── */
-        .scanline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0.15;
-            animation: scan 8s linear infinite;
-            pointer-events: none;
-            z-index: 200;
-        }
 
-        @keyframes scan {
-            from { top: 0; }
-            to { top: 100vh; }
-        }
 
         /* ── SCROLL ANIMATIONS ── */
         .reveal {
@@ -691,8 +674,6 @@
 </head>
 <body>
 
-<div class="scanline"></div>
-
 <!-- NAV -->
 <nav>
     <a href="/" class="nav-wordmark">REKD</a>
@@ -700,14 +681,14 @@
         <li><a href="#signal">The Signal</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#integrations">Integrations</a></li>
-        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
         <li><a href="#download" class="nav-cta">Download</a></li>
     </ul>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-    <div class="hero-eyebrow">Night Shift Intelligence</div>
+    <div class="hero-eyebrow">Personal Health Intelligence</div>
     <h1>
         Your body<br>
         doesn't run<br>
@@ -716,7 +697,7 @@
         <span class="accent">REKD.</span>
     </h1>
     <p class="hero-sub">
-        REKD turns your health data into a single operational score — calibrated for the biological reality of night shift. No guesswork. No generic wellness advice. Just signal.
+        REKD turns your health signals into operational intelligence — calibrated to your biology, your schedule, and the life you're actually living. No guesswork. No generic wellness advice. Just signal.
     </p>
     <div class="hero-actions">
         <a href="#download" class="app-badge">
@@ -755,7 +736,7 @@
         <div class="section-eyebrow">The Signal</div>
         <h2>One number.<br><span class="accent">Everything</span><br>that matters.</h2>
         <p class="section-lead">
-            REKD synthesizes sleep quality, HRV, shift fatigue, nutrition adherence, and recovery trajectory into a single score — computed fresh every day, calibrated to your biology.
+            REKD synthesizes sleep quality, HRV, shift fatigue, nutrition adherence, and recovery trajectory into a single score — updated whenever your data changes, calibrated to your biology.
         </p>
     </div>
 
@@ -804,8 +785,8 @@
         <div class="signal-cell span2">
             <div style="display:flex;align-items:center;gap:48px;flex-wrap:wrap;">
                 <div>
-                    <div class="cell-title">Powered by Claude AI</div>
-                    <div class="cell-body" style="max-width:480px;">Your Signal isn't a formula. It's a conversation between your data and an intelligence that understands context, nuance, and the specific biology of rotating shift work. Every score comes with an explanation. Every insight is actionable.</div>
+                    <div class="cell-title">Intelligent by design</div>
+                    <div class="cell-body" style="max-width:480px;">Your Signal isn't a formula. It's a synthesis of context, nuance, and the specific demands of your schedule and biology. Every score comes with a plain-language explanation. Every insight is actionable.</div>
                 </div>
                 <div style="flex:1;min-width:200px;border-left:2px solid var(--accent);padding-left:32px;">
                     <div style="font-size:13px;line-height:1.9;color:var(--secondary);font-style:italic;">"HRV is elevated relative to your 14-day baseline. Combined with 7h12m sleep and low shift fatigue, today is a high-output window. Prioritize your most demanding work in the first 3 hours post-wake."</div>
@@ -821,7 +802,7 @@
     <div class="reveal">
         <div class="section-eyebrow">Features</div>
         <h2>Built for the<br><span class="accent">operational</span><br>reality.</h2>
-        <p class="section-lead">Every feature exists because night shift workers need it — not because a wellness app checklist says it should exist.</p>
+        <p class="section-lead">Every feature exists because the people who don't work 9-to-5 need it — not because a wellness app checklist says it should exist.</p>
     </div>
 
     <div class="features-grid reveal">
@@ -908,7 +889,7 @@
 <section class="forwho-section">
     <div class="reveal">
         <div class="section-eyebrow">Who It's For</div>
-        <h2>If you work<br>when the world<br><span class="accent">sleeps.</span></h2>
+        <h2>Anyone whose<br>body is on<br><span class="accent">the line.</span></h2>
     </div>
 
     <div class="forwho-grid reveal">
@@ -928,6 +909,10 @@
             <div class="forwho-role">Industrial & Manufacturing</div>
             <div class="forwho-body">Plant operators, maintenance technicians, quality inspectors. Physical and cognitive demands that don't pause for biology.</div>
         </div>
+        <div class="forwho-item">
+            <div class="forwho-role">Anyone, Anywhere</div>
+            <div class="forwho-body">Early risers, frequent travelers, new parents, athletes in training. If your schedule doesn't fit the 9-to-5 mold, REKD was built for you.</div>
+        </div>
     </div>
 </section>
 
@@ -937,7 +922,7 @@
         <div class="section-eyebrow" style="justify-content:center;">Get Started</div>
         <h2>Know your<br><span class="accent">Signal.</span></h2>
         <p class="section-lead" style="margin-left:auto;margin-right:auto;text-align:center;">
-            Available on iPhone. Requires iOS 17 or later and an Apple Watch for full functionality.
+            Available now on iPhone. iOS 17 or later.
         </p>
         <div class="cta-actions">
             <a href="#" class="app-badge" style="min-width:200px;justify-content:center;">
@@ -956,9 +941,9 @@
 <footer>
     <div class="footer-wordmark">REKD</div>
     <ul class="footer-links">
-        <li><a href="/privacy">Privacy Policy</a></li>
-        <li><a href="/support">Support</a></li>
-        <li><a href="/auth/reset">Reset Password</a></li>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+        <li><a href="/support.html">Support</a></li>
+        <li><a href="/auth/reset.html">Reset Password</a></li>
     </ul>
     <div class="footer-copy">© 2026 Admiral Kitty Studios LLC</div>
 </footer>
