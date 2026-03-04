@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support — REKD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #080808; --surface: #0f0f0f; --border: #1c1c1c;
+            --accent: #c8fa5f; --text: #f0f0f0; --secondary: #5a5a5a;
+            --mono: 'DM Mono', monospace; --display: 'Barlow Condensed', sans-serif;
+        }
+        body { background: var(--bg); color: var(--text); font-family: var(--mono); -webkit-font-smoothing: antialiased; }
+        body::before {
+            content: ''; position: fixed; inset: 0; pointer-events: none;
+            background-image: linear-gradient(rgba(200,250,95,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(200,250,95,0.025) 1px, transparent 1px);
+            background-size: 64px 64px;
+        }
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 40px; height: 64px;
+            background: rgba(8,8,8,0.92); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-wordmark { font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: 0.15em; color: var(--accent); text-decoration: none; }
+        .nav-back { font-size: 11px; letter-spacing: 0.2em; color: var(--secondary); text-decoration: none; text-transform: uppercase; transition: color 0.15s; }
+        .nav-back:hover { color: var(--text); }
+        main { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 120px 40px 80px; }
+        .eyebrow { font-size: 10px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+        h1 { font-family: var(--display); font-weight: 800; font-size: 56px; line-height: 0.95; text-transform: uppercase; margin-bottom: 48px; }
+        h2 { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 48px 0 16px; }
+        p { font-size: 13px; line-height: 1.9; color: var(--secondary); margin-bottom: 16px; }
+        ul { padding-left: 20px; margin-bottom: 16px; }
+        li { font-size: 13px; line-height: 1.9; color: var(--secondary); margin-bottom: 4px; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .contact-card {
+            border: 1px solid var(--border); padding: 40px; margin-top: 48px;
+            display: flex; flex-direction: column; gap: 8px;
+            border-left: 2px solid var(--accent);
+        }
+        .contact-label { font-size: 10px; letter-spacing: 0.25em; color: var(--secondary); text-transform: uppercase; }
+        .contact-value { font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: 0.05em; color: var(--text); }
+        .contact-value a { color: var(--text); }
+        .contact-value a:hover { color: var(--accent); text-decoration: none; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 24px 0; }
+        .faq-q { font-size: 13px; color: var(--text); margin-bottom: 8px; letter-spacing: 0.02em; }
+        .faq-a { font-size: 12px; line-height: 1.8; color: var(--secondary); }
+        footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 32px 40px; max-width: 720px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .footer-wordmark { font-family: var(--display); font-weight: 800; font-size: 16px; letter-spacing: 0.15em; color: var(--accent); }
+        .footer-copy { font-size: 10px; letter-spacing: 0.1em; color: var(--secondary); }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="nav-wordmark">REKD</a>
+    <a href="/" class="nav-back">← Back</a>
+</nav>
+<main>
+    <div class="eyebrow">Help</div>
+    <h1>Support</h1>
+
+    <p>REKD is built and maintained by a small team. We read every message and respond within 48 hours — usually faster.</p>
+
+    <div class="contact-card">
+        <div class="contact-label">Email Support</div>
+        <div class="contact-value"><a href="mailto:support@rekdapp.com">support@rekdapp.com</a></div>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+        <div class="faq-q">Why is my Signal score low on my first day?</div>
+        <div class="faq-a">REKD needs a baseline before it can compute an accurate score. After your first full sleep session with HealthKit data, the Signal will reflect your actual health status. Give it 2–3 days for full calibration.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">How do I reset my password?</div>
+        <div class="faq-a">Open REKD → Sign In → Forgot Password. Enter your email and we'll send a reset link to your inbox. The link expires after 1 hour.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">REKD isn't reading my HealthKit data.</div>
+        <div class="faq-a">Go to Settings → Health → Data Access & Devices → REKD and verify all permissions are enabled. REKD requires heart rate, HRV, sleep analysis, and step count at minimum for Signal computation.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">How do I connect my Withings scale?</div>
+        <div class="faq-a">Settings → Integrations → Withings → Connect. You'll be prompted to sign into your Withings account and authorize REKD to read your measurements.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">How do I cancel my subscription?</div>
+        <div class="faq-a">Subscriptions are managed through Apple. Go to Settings → [Your Name] → Subscriptions → REKD → Cancel Subscription. Your access continues until the end of the current billing period.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">How do I delete my account and data?</div>
+        <div class="faq-a">Settings → Account → Delete Account. This permanently removes your account and all associated data from our servers within 30 days. This action cannot be undone.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">Is my health data private?</div>
+        <div class="faq-a">Yes. Raw health values never leave your device. Only anonymized behavioral metadata is stored on our servers. We do not sell data. We do not use health data for advertising. Full details in our <a href="/privacy">Privacy Policy</a>.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">REKD isn't recognizing my shift schedule.</div>
+        <div class="faq-a">Settings → Schedule → configure your shift days and hours. REKD also learns your schedule automatically from geofence and sleep data over time — manual configuration ensures accuracy from day one.</div>
+    </div>
+
+    <h2>Known Issues</h2>
+    <p>Current build status and known issues are posted at <a href="https://github.com/AdmiralKittysDad">github.com/AdmiralKittysDad</a>.</p>
+
+</main>
+<footer>
+    <div class="footer-wordmark">REKD</div>
+    <div class="footer-copy">© 2026 Admiral Kitty Studios LLC</div>
+</footer>
+</body>
+</html>
