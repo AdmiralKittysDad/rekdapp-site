@@ -62,6 +62,7 @@
     <p>REKD collects the following categories of data:</p>
     <ul>
         <li><strong>Health and fitness data</strong> — sourced from Apple HealthKit, Apple Watch, and connected third-party devices (Withings, Oura, WHOOP, Garmin). This includes heart rate, HRV, sleep analysis, body composition, activity, and related metrics.</li>
+        <li><strong>Weather data</strong> — current conditions for your location, retrieved via Apple WeatherKit. Used to provide physiological context for your Signal and workout recommendations. Your precise coordinates are never stored — only the resulting conditions (temperature, pressure, precipitation probability, and similar data) are saved to your account.</li>
         <li><strong>Account information</strong> — email address and authentication credentials used to create and access your account.</li>
         <li><strong>Behavioral metadata</strong> — anonymized timing and pattern data derived from your health data, used to compute your Signal score and generate insights. Raw health values are never transmitted to our servers.</li>
         <li><strong>Usage data</strong> — aggregate token usage for AI inference, used for rate limiting and service integrity. No prompt content is logged.</li>
@@ -78,6 +79,9 @@
     <h2>HealthKit Data</h2>
     <p>REKD accesses Apple HealthKit data solely to provide the features described in this application. We do not sell HealthKit data to third parties. We do not use HealthKit data for advertising. HealthKit data is processed on your device wherever possible. Behavioral metadata derived from HealthKit data (never raw values) may be stored on our servers to power your Signal history and weekly briefings.</p>
 
+    <h2>Weather Data</h2>
+    <p>REKD uses Apple WeatherKit to retrieve weather conditions for your current location. Weather data is used to provide physiological context for your health Signal and workout recommendations — for example, noting when falling barometric pressure may contribute to fatigue. Your precise location coordinates are never stored. Only the resulting weather conditions (temperature, pressure, precipitation probability, and similar data) are saved to your account to support your weekly briefing. Weather data is fetched at most once every 30 minutes and only while the app is active or resuming from background.</p>
+
     <h2>Data Storage and Security</h2>
     <p>Your account data and behavioral metadata are stored in a secured database hosted by Supabase, with row-level security ensuring only you can access your data. Authentication tokens are stored in your device's secure Keychain. OAuth credentials for third-party integrations never leave your device.</p>
     <p>AI inference is performed via Anthropic's Claude API. Your health prompts are not logged or used for model training by Anthropic under our data processing agreement.</p>
@@ -90,7 +94,7 @@
     <ul>
         <li><strong>Supabase</strong> — database and authentication infrastructure</li>
         <li><strong>Anthropic</strong> — AI inference for Signal computation and insights</li>
-        <li><strong>Apple</strong> — App Store subscription validation</li>
+        <li><strong>Apple</strong> — App Store subscription validation and WeatherKit data retrieval</li>
     </ul>
 
     <h2>Your Rights</h2>
